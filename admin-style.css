@@ -1,0 +1,9 @@
+/* admin CSS styles for Quartiere fuer Menschen WordPress theme by STADTKREATION 01/2021 */
+
+@import 'css/qfm-map.css';
+
+#acf-location-metadata .acf-field-location-longitude,
+#acf-location-metadata .acf-field-location-latitude {
+	display:none;
+}
+

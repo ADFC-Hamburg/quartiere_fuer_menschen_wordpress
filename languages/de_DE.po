@@ -1,0 +1,567 @@
+# Copyright (C) 2020 Automattic
+# This file is distributed under the GNU General Public License v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Quartiere fuer Menschen\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/theme/_s\n"
+"POT-Creation-Date: 2021-02-04 11:17+0100\n"
+"PO-Revision-Date: 2021-02-04 11:18+0100\n"
+"Last-Translator: \n"
+"Language-Team: STADTKREATION\n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.2\n"
+"X-Domain: _s\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;"
+"_n_noop:1,2;_c;_nc:4c,1,2;_x:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;_ex:1,2c;"
+"esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: 404.php:17
+msgid "Page not found"
+msgstr "Seite nicht gefunden"
+
+#: 404.php:21
+msgid ""
+"Nothing was found at this location. Please try to find the respective "
+"content via the navigation menu."
+msgstr ""
+"An dieser Stelle wurde nichts gefunden. Bitte versuche, den gewünschten "
+"Inhalt über das Navigationsmenü zu finden."
+
+#: comments.php:35
+#, php-format
+msgid "One thought on &ldquo;%1$s&rdquo;"
+msgstr "Ein Kommentar zu &ldquo;%1$s&rdquo;"
+
+#: comments.php:41
+#, php-format
+msgctxt "comments title"
+msgid "%1$s thought on &ldquo;%2$s&rdquo;"
+msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
+msgstr[0] "%1$s Kommentar zu &ldquo;%2$s&rdquo;"
+msgstr[1] "%1$s Kommentare zu &ldquo;%2$s&rdquo;"
+
+#: comments.php:68
+msgid "Comments are closed."
+msgstr "Kommentarfuntkion geschlossen."
+
+#: functions.php:13
+msgid "Quartiere fuer Menschen"
+msgstr "Quartiere für Menschen"
+
+#: functions.php:14
+msgid "WordPress theme for Quartiere fuer Menschen project by ADFC Hamburg."
+msgstr ""
+"WordPress-Theme für das Projekt „Quartiere für Menschen“ des ADFC Hamburg."
+
+#: functions.php:15
+msgid "https://stadtkreation.de/en/wordpress-themes-and-plugins/"
+msgstr "https://stadtkreation.de/wordpress-themes-und-plugins/"
+
+#: functions.php:16
+msgid "https://stadtkreation.de/en/about-us/"
+msgstr "https://stadtkreation.de/ueber-uns/"
+
+#: functions.php:69
+msgid "Primary"
+msgstr "Primär"
+
+#: functions.php:142
+msgid "Top bar"
+msgstr "Oberer Balken"
+
+#: functions.php:143
+msgid "Footer left"
+msgstr "Fußzeile links"
+
+#: functions.php:144
+msgid "Footer right"
+msgstr "Fußzeile rechts"
+
+#: functions.php:151
+msgid "Add widgets here."
+msgstr "Widgets hier hinzufügen."
+
+#: functions.php:234
+msgid ""
+"Warning: Quartiere fuer Menschen theme only works correctly when a front "
+"page has been selected in Settings > Reading."
+msgstr ""
+"Warnung: Das Theme „Quartiere für Menschen“ funktioniert nur vollständig, "
+"wenn eine Startseite unter Einstellungen > Lesen ausgewählt wurde."
+
+#: functions.php:246
+msgctxt "Post Type General Name"
+msgid "Locations"
+msgstr "Orte"
+
+#: functions.php:247
+msgctxt "Post Type Singular Name"
+msgid "Location"
+msgstr "Ort"
+
+#: functions.php:248
+msgid "Locations"
+msgstr "Orte"
+
+#: functions.php:249 functions.php:275
+msgid "Location"
+msgstr "Ort"
+
+#: functions.php:250
+msgid "Location Archives"
+msgstr "Orte-Archiv"
+
+#: functions.php:251
+msgid "Location Attributes"
+msgstr "Orte-Attribute"
+
+#: functions.php:252
+msgid "Parent Location:"
+msgstr "Übergeordneter Ort:"
+
+#: functions.php:253
+msgid "All Locations"
+msgstr "Alle Orte"
+
+#: functions.php:254
+msgid "Add New Location"
+msgstr "Neuen Ort hinzufügen"
+
+#: functions.php:255 functions.php:306
+msgid "Add New"
+msgstr "Erstellen"
+
+#: functions.php:256
+msgid "New Location"
+msgstr "Neuer Ort"
+
+#: functions.php:257
+msgid "Edit Location"
+msgstr "Ort bearbeiten"
+
+#: functions.php:258
+msgid "Update Location"
+msgstr "Ort aktualisieren"
+
+#: functions.php:259
+msgid "View Location"
+msgstr "Ort ansehen"
+
+#: functions.php:260
+msgid "View Locations"
+msgstr "Orte ansehen"
+
+#: functions.php:261
+msgid "Search Location"
+msgstr "Orte suchen"
+
+#: functions.php:262
+msgid "No Location found"
+msgstr "Keine Orte gefunden"
+
+#: functions.php:263
+msgid "No Location found in Trash"
+msgstr "Keine Orte im Papierkorb gefunden"
+
+#: functions.php:264 functions.php:315
+msgid "Featured Image"
+msgstr "Beitragsbild"
+
+#: functions.php:265 functions.php:316
+msgid "Set featured image"
+msgstr "Beitragsbild setzen"
+
+#: functions.php:266 functions.php:317
+msgid "Remove featured image"
+msgstr "Beitragsbild entfernen"
+
+#: functions.php:267 functions.php:318
+msgid "Use as featured image"
+msgstr "Als Beitragsbild nutzen"
+
+#: functions.php:268 functions.php:319
+msgid "Insert into item"
+msgstr "In den Beitrag einfügen"
+
+#: functions.php:269
+msgid "Uploaded to this Location"
+msgstr "Zu diesem Ort hochgeladen"
+
+#: functions.php:270
+msgid "Locations list"
+msgstr "Orte-Liste"
+
+#: functions.php:271
+msgid "Locations list navigation"
+msgstr "Orte-Listennavigation"
+
+#: functions.php:272
+msgid "Filter Locations list"
+msgstr "Orte-Liste filtern"
+
+#: functions.php:276
+msgid "Locations for Quartiere fuer Menschen WordPress theme."
+msgstr "Orte für das WordPress-Theme „Quartiere für Menschen“."
+
+#: functions.php:297
+msgctxt "Post Type General Name"
+msgid "Events"
+msgstr "Termine"
+
+#: functions.php:298
+msgctxt "Post Type Singular Name"
+msgid "Event"
+msgstr "Termin"
+
+#: functions.php:299
+msgid "Events"
+msgstr "Termine"
+
+#: functions.php:300 functions.php:326
+msgid "Event"
+msgstr "Termin"
+
+#: functions.php:301
+msgid "Event Archives"
+msgstr "Termin-Archiv"
+
+#: functions.php:302
+msgid "Event Attributes"
+msgstr "Termin-Attribute"
+
+#: functions.php:303
+msgid "Parent Event:"
+msgstr "Übergeordneter Termin:"
+
+#: functions.php:304
+msgid "All Events"
+msgstr "Alle Termine"
+
+#: functions.php:305
+msgid "Add New Event"
+msgstr "Neuen Termin hinzufügen"
+
+#: functions.php:307
+msgid "New Event"
+msgstr "Neuer Termin"
+
+#: functions.php:308
+msgid "Edit Event"
+msgstr "Termin bearbeiten"
+
+#: functions.php:309
+msgid "Update Event"
+msgstr "Termin aktualisieren"
+
+#: functions.php:310
+msgid "View Event"
+msgstr "Termin ansehen"
+
+#: functions.php:311
+msgid "View Events"
+msgstr "Termine ansehen"
+
+#: functions.php:312
+msgid "Search Event"
+msgstr "Termine suchen"
+
+#: functions.php:313
+msgid "No Event found"
+msgstr "Keine Termine gefunden"
+
+#: functions.php:314
+msgid "No Event found in Trash"
+msgstr "Keine Termine im Papierkorb gefunden"
+
+#: functions.php:320
+msgid "Uploaded to this Event"
+msgstr "Zu diesem Termin hochgeladen"
+
+#: functions.php:321
+msgid "Events list"
+msgstr "Termine-Liste"
+
+#: functions.php:322
+msgid "Events list navigation"
+msgstr "Terine-Listennavigation"
+
+#: functions.php:323
+msgid "Filter Events list"
+msgstr "Termin-Liste filtern"
+
+#: functions.php:327
+msgid "Events for Quartiere fuer Menschen WordPress theme."
+msgstr "Termine für das WordPress-Theme „Quartiere für Menschen“."
+
+#: functions.php:355
+msgctxt "taxonomy general name"
+msgid "Location Types"
+msgstr "Ortstypen"
+
+#: functions.php:356
+msgctxt "taxonomy singular name"
+msgid "Location Type"
+msgstr "Ortstyp"
+
+#: functions.php:357
+msgid "Search Location Types"
+msgstr "Ortstypen suchen"
+
+#: functions.php:358
+msgid "All Location Types"
+msgstr "Alle Ortstypen"
+
+#: functions.php:359
+msgid "Parent Location Type"
+msgstr "Übergeordneter Ortstyp"
+
+#: functions.php:360
+msgid "Parent Location Type:"
+msgstr "Übergeordneter Ortstyp:"
+
+#: functions.php:361
+msgid "Edit Location Type"
+msgstr "Ortstyp bearbeiten"
+
+#: functions.php:362
+msgid "Update Location Type"
+msgstr "Ortstyp aktualisieren"
+
+#: functions.php:363
+msgid "Add New Location Type"
+msgstr "Neuen Ortstyp hinzufügen"
+
+#: functions.php:364
+msgid "New Location Type Name"
+msgstr "Neuer Ortstyp"
+
+#: functions.php:365
+msgid "Location Types"
+msgstr "Ortstypen"
+
+#: functions.php:446
+msgid "View details"
+msgstr "Details ansehen"
+
+#: functions.php:447
+msgid "Edit location"
+msgstr "Ort bearbeiten"
+
+#: functions.php:454
+msgid "Back to default map view"
+msgstr "Zurück zur Standard-Kartenansicht"
+
+#: functions.php:487
+msgid "Location metadata"
+msgstr "Metadaten des Ortes"
+
+#: functions.php:491
+msgid "Location longitude"
+msgstr "Längengrad des Ortes"
+
+#: functions.php:498
+msgid "Location latitude"
+msgstr "Breitengrad des Ortes"
+
+#: functions.php:505
+msgid ""
+"The alternative icon file must have the same name as the main icon file, but "
+"with \"-2\" in the end."
+msgstr ""
+"Die alternative Icondatei muss denselben Namen haben wie die zugehörige "
+"Hauptdatei, jedoch mit \"-2\" am Ende."
+
+#: functions.php:506
+msgid "Use alternative icon"
+msgstr "Alternatives Icon nutzen"
+
+#: functions.php:512
+msgid "Typ deines Ortes"
+msgstr ""
+
+#: functions.php:524
+#, php-format
+msgid "Dein Name oder Spitzname %s"
+msgstr ""
+
+#: functions.php:524
+msgid "(wird auf der Website angezeigt!)"
+msgstr ""
+
+#: functions.php:530
+#, php-format
+msgid "Deine E-Mail-Adresse %s"
+msgstr ""
+
+#: functions.php:530
+msgid "(wird nicht veröffentlicht)"
+msgstr ""
+
+#: functions.php:563
+msgid ""
+"Vielen Dank. Dein Vorschlag für einen neuen Ort wurde gespeichert. Er wird "
+"nun zeitnah durch die Redaktion geprüft und anschließend freigeschaltet."
+msgstr ""
+
+#: functions.php:578
+msgid "Vorschlag für neuen Ort absenden"
+msgstr ""
+
+#: functions.php:638
+msgid "Bezeichnung des neuen Ortes"
+msgstr ""
+
+#: functions.php:645
+#, php-format
+msgid "Beschreibung %s"
+msgstr ""
+
+#: functions.php:645
+msgid "(maximal 1500 Zeichen)"
+msgstr ""
+
+#: functions.php:648
+msgid "Kartenposition deines Ortes"
+msgstr ""
+
+#: functions.php:649
+msgid ""
+"Klicke auf die Karte, um deinen Ort zu setzen. Um die Position zu verändern, "
+"klicke einfach an den neuen Ort."
+msgstr ""
+
+#: header.php:32
+msgid "Skip to content"
+msgstr "Zum Inhalt springen"
+
+#: header.php:59
+msgid "Primary Menu"
+msgstr "Hauptmenü"
+
+#: inc/template-tags.php:30
+#, php-format
+msgctxt "post date"
+msgid "Posted on %s"
+msgstr "Verfasst am %s"
+
+#: inc/template-tags.php:46
+#, php-format
+msgctxt "post author"
+msgid "by %s"
+msgstr "von %s"
+
+#: inc/template-tags.php:63
+msgid ", "
+msgstr ", "
+
+#: inc/template-tags.php:66
+#, php-format
+msgid "Posted in %1$s"
+msgstr "Verfasst in %1$s"
+
+#: inc/template-tags.php:70
+msgctxt "list item separator"
+msgid ", "
+msgstr ", "
+
+#: inc/template-tags.php:73
+#, php-format
+msgid "Tagged %1$s"
+msgstr "Verschlagwortet mit %1$s"
+
+#: inc/template-tags.php:83
+#, php-format
+msgid "Leave a Comment<span class=\"screen-reader-text\"> on %s</span>"
+msgstr ""
+"Einen Kommentar verfassen<span class=\"screen-reader-text\"> on %s</span>"
+
+#: inc/template-tags.php:100 template-parts/content-page.php:39
+#, php-format
+msgid "Edit <span class=\"screen-reader-text\">%s</span>"
+msgstr "<span class=\"screen-reader-text\">%s </span>bearbeiten"
+
+#: include/admin.php:21
+msgid "QFM settings"
+msgstr "QFM-Einstellungen"
+
+#: include/admin.php:36
+msgid "Quartiere fuer Menschen theme settings"
+msgstr "Einstellungen für das Theme Quartiere für Menschen"
+
+#: include/admin.php:38
+msgid "Settings will come in a future version."
+msgstr "Einstellungen kommen in einer zukünftigen Version."
+
+#: include/admin.php:51
+msgid "Map position"
+msgstr "Kartenposition"
+
+#: search.php:21
+#, php-format
+msgid "Search Results for: %s"
+msgstr "Surchergebnisse für: %s"
+
+#: single.php:23
+msgid "Previous:"
+msgstr "Vorherige Seite:"
+
+#: single.php:24
+msgid "Next:"
+msgstr "Nächste Seite:"
+
+#: template-parts/content-none.php:14
+msgid "Nothing Found"
+msgstr "Nichts gefunden"
+
+#: template-parts/content-none.php:24
+#, php-format
+msgid ""
+"Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
+msgstr ""
+"Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
+
+#: template-parts/content-none.php:37
+msgid ""
+"Sorry, but nothing matched your search terms. Please try again with some "
+"different keywords."
+msgstr ""
+"Zu Ihrer Suche wurden leider keine Ergebnisse geliefert. Bitte versuchen Sie "
+"es mit einem anderen Suchbegriff."
+
+#: template-parts/content-none.php:44
+msgid ""
+"It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps "
+"searching can help."
+msgstr ""
+"Der von dir gewünschte Inhalt wurde nicht gefunden. Bitte benutze die "
+"Suchfunktion."
+
+#: template-parts/content-page.php:25 template-parts/content.php:53
+msgid "Pages:"
+msgstr "Seiten:"
+
+#: template-parts/content.php:40
+#, php-format
+msgid "Continue reading<span class=\"screen-reader-text\"> \"%s\"</span>"
+msgstr "<span class=\"screen-reader-text\">\"%s\" </span>weiterlesen"
+
+#~ msgid "https://wordpress.org/"
+#~ msgstr "https://de.wordpress.org/"
+
+#, php-format
+#~ msgid "Proudly powered by %s"
+#~ msgstr "Stolz präsentiert von %s"
+
+#, php-format
+#~ msgid "Theme: %1$s by %2$s."
+#~ msgstr "Theme: %1$s von %2$s."
+
+#~ msgid "Sidebar"
+#~ msgstr "Seitenleiste"
