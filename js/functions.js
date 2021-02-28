@@ -203,7 +203,7 @@ function initMap() {
 				//if(qfmMap.getZoom() >= mapAtts.minZoomSetmarker) {
 					var firstType = [];
 					if(typeof(locationTypes)!='undefined') firstType = locationTypes[0];
-					var markerIcon = L.icon({iconUrl: defaultIconUrl, iconSize: [iconWidth, iconHeight], iconAnchor: [(iconWidth/2), iconHeight], popupAnchor: [0, (iconHeight + 3)*-1]});
+					var markerIcon = L.icon({iconUrl: (defaultIconUrl ? defaultIconUrl : locationTypes[0][2]), iconSize: [iconWidth, iconHeight], iconAnchor: [(iconWidth/2), iconHeight], popupAnchor: [0, (iconHeight + 3)*-1]});
 					if(locationMarker == '') locationMarker = new L.marker([lat,lon],{draggable: false, icon: markerIcon}).addTo(markerLayer[firstType[0]]);
 					else locationMarker.setLatLng([lat,lon]);
 					qfmMap.setView([lat,lon]);

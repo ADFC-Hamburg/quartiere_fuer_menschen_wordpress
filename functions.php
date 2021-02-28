@@ -25,7 +25,7 @@ if ( is_admin() ) {
 
 if ( ! defined( '_S_VERSION' ) ) {
 	// Replace the version number of the theme on each release.
-	define( '_S_VERSION', '0.4' );
+	define( '_S_VERSION', '0.5' );
 }
 
 if ( ! function_exists( 'qfm_setup' ) ) :
@@ -294,7 +294,7 @@ function qfm_custom_post_types() {
 	);
 	register_post_type( 'location', $args );
 	
-	$labels = array(
+	/*$labels = array(
 		'name'                  => _x( 'Events', 'Post Type General Name', 'qfm' ),
 		'singular_name'         => _x( 'Event', 'Post Type Singular Name', 'qfm' ),
 		'menu_name'             => esc_html__( 'Events', 'qfm' ),
@@ -343,7 +343,7 @@ function qfm_custom_post_types() {
 		'publicly_queryable'    => true,
 		'capability_type'       => 'post',
 	);
-	register_post_type( 'event', $args );
+	register_post_type( 'event', $args );*/
 
 }
 add_action( 'init', 'qfm_custom_post_types', 0 );
@@ -415,12 +415,14 @@ function qfm_shortcode_qfm_map($atts) {
 		$bounds_sw = explode(',',$a['bounds-sw']);
 	}
 	
+	$default_output = '""';
 	$attachment = qfm_get_attachment_by_post_name( 'marker-00-default' );
+	if($attachment) $default_output = '"'.wp_get_attachment_url($attachment->ID).'"';
 	$output .= '
 	<div class="qfm-map-wrapper">
 		<div class="qfm-map'.($single ? ' single' : '').'" id="qfm-map"></div>	
 		<script type="text/javascript">
-			var defaultIconUrl = "'.wp_get_attachment_url($attachment->ID).'";
+			var defaultIconUrl = '.$default_output.';
 			var locationTypes = [';
 	$first = true;
 	$terms = get_terms('location-type',array('hide_empty' => false,'orderby' => 'slug'));
@@ -460,18 +462,22 @@ function qfm_shortcode_qfm_map($atts) {
 			var showId = '.intval($_GET['showentry']).';';
 	$output .= '
 		</script>
-		<div class="qfm-map-buttons'.($single ? ' single' : '').'">
+		<div class="qfm-map-buttons'.($single ? ' single' : '').'">';
+	if(!$setmarker && !$single) {
+		$output .= '
 			<p class="filter-adfc-or-community">
 				<a class="button small filter show-adfc" href="#">'.esc_html__('ADFC-Orte aus-/einblenden','qfm').'</a>
 				<a class="button small filter show-community" href="#">'.esc_html__('Community-Orte aus-/einblenden','qfm').'</a>
-			</p>
+			</p>';
+	}
+	$output .= '
 			<p class="qfm-map-default-view"><a href="#">'.esc_html__('Back to default map view','qfm').'</a></p>';
 	if(get_post_meta(get_option('page_on_front'),'new-location-form-page',true) && !$setmarker && !$single) {
 		$output .= '
 			<p class="qfm-map-new-location"><a class="button" href="'.get_permalink(get_post_meta(get_option('page_on_front'),'new-location-form-page',true)).'">'.esc_html__('Einen neuen Ort ergänzen','qfm').'</a></p>';
 	}
 	if(get_post_meta(get_option('page_on_front'),'map-page',true) && $single) {
-		$output .= '<p class="map-page-button"><a href="'.get_permalink(get_post_meta(get_option('page_on_front'),'map-page',true)).'" class="button">'.esc_html__('zur Gesamtkarte wechseln','qfm').'</a></p>';
+		$output .= '<p class="map-page-button"><a href="'.get_permalink(get_post_meta(get_option('page_on_front'),'map-page',true)).'#qfm-map" class="button">'.esc_html__('zur Gesamtkarte wechseln','qfm').'</a></p>';
 	}
 	$output .= '
 		</div>
@@ -697,25 +703,6 @@ if(function_exists('acf_form_head')) {
 						<p class="field_value">'.$display_value.'</p>';
 				}
 			}
-			/*if(get_post_meta(get_option('page_on_front'),'kontaktboerse-kontaktformular-seite',true)) {
-				$content .= 
-				'<p class="kontaktformular-fuer-eintrag">
-					<button>
-						<a href="'.add_query_arg('eintragsid',get_the_ID(),get_permalink(get_post_meta(get_option('page_on_front'),'kontaktboerse-kontaktformular-seite',true))).'">Kontakt mit der Eintragserstellerin bzw. dem Eintragsersteller aufnehmen</a>
-					</button>
-				</p>';
-			}
-			else {
-				if(current_user_can('manage_options')) {
-					$content .= wpautop('FEHLER: Bitte wählen Sie auf der Startseite im entsprechenden Feld die Seite aus, auf der das Kontaktformular für die Kontaktforum eingebunden wurde.');
-				}
-			}
-			if(get_post_meta(get_option('page_on_front'),'kontaktboerse-startseite',true)) {
-				$content .= 
-				'<p>
-						<a href="'.get_permalink(get_post_meta(get_option('page_on_front'),'kontaktboerse-startseite',true)).'">zurück zur Übersicht</a>
-				</p>';
-			}*/
 		}
 		return $content;
 	}
@@ -738,7 +725,7 @@ if(has_filter('acf/get_valid_field')) {
 		}
 		if($field['key'] == 'location-latitude') {
 			$field['label'] = esc_html__('Kartenposition deines Ortes','qfm');
-			$field['instructions'] = esc_html__('Klicke auf die Karte, um deinen Ort zu setzen. Um die Position zu verändern, klicke einfach an den neuen Ort.','qfm');
+			$field['instructions'] = sprintf(esc_html__('Klicke auf die Karte, um deinen Ort zu setzen. Um die Position zu verändern, klicke einfach an den neuen Ort. %s','qfm'),' <strong>'.esc_html__('Nach dem Freischalten deines Vorschlags werden auf der Gesamtkarte das zum gewählten Ortstyp passende Icon und deine Beschreibungen erscheinen.','qfm').'</strong>');
 		}
 		if(!is_user_logged_in()) {
 			if($field['key'] == 'location-nickname') {
@@ -841,12 +828,14 @@ function qfm_maildomain() {
 	return $maildomain;
 }
 
-// comment notification
+/**
+ * Comment notification
+ */
 function show_message_function( $comment_ID, $comment_approved, $commentdata ) {
     $to = $commentdata['comment_author_email'];
 	$headers = 'From: '.get_option('blogname').' '.esc_html__('Nachrichtenservice','qfm')." <noreply@".qfm_maildomain().">" . "\r\n";
 	$headers .= 'Reply-To: '.get_option('admin_email'). "\r\n" .
-	$subject = '['.get_option('blogname').'] '.esc_html__('Neuer Kommentar','qfm');
+	$subject = '['.get_option('blogname').'] '.esc_html__('Dein Kommentar','qfm');
 	$message = 'Hallo '.$commentdata['comment_author'].','."\r\n\r\n";
 	$message .= 'vielen Dank für deinen Kommentar zum Beitrag '.get_permalink($commentdata['comment_post_ID']).'. Du hast Folgendes geschrieben: '."\r\n\r\n";
 	$message .= '----'."\r\n\r\n".$commentdata['comment_content']."\r\n\r\n".'----'."\r\n\r\n";
@@ -861,4 +850,47 @@ function show_message_function( $comment_ID, $comment_approved, $commentdata ) {
 }
 add_action( 'comment_post', 'show_message_function', 10, 3 );
 
+/**
+ * Send mail to admin when a new location has been submitted
+ */
+function qfm_location_notification_email($post_id, $post, $update) {
+  if($update) {
+	  return;
+  }
+  
+  if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) 
+      return;
 
+  if (get_post_type($post_id) == 'location' && get_post_status($post_id) == 'pending') {
+	  $to = get_option('admin_email');
+	  $headers = 'From: '.get_bloginfo('name')." <noreply@".qfm_maildomain().">";
+	  $subject = '['.get_bloginfo('name').']'.' Ein neuer Ort für die QfM-Karte wurde eingereicht';
+	  $message = 'Bitte überprüfe den eingereichten Beitrag und veröffentliche ihn nach erfolgreicher Prüfung.'."\r\n\r\n";
+	  $message .= 'Hier kannst du den Beitrag bearbeiten:'."\r\n";
+	  $message .= get_admin_url().'post.php?post='.$post_id.'&action=edit'."\r\n\r\n";
+	  if(!is_user_logged_in()) {
+		$message .= 'Bei Rückfragen kannst du die Verfasserin/den Verfasser des Beitrags unter dieser E-Mail-Adresse kontaktieren (sofern sie/er die richtige E-Mail-Adresse eingetragen hat):'."\r\n";
+		$message .= $_POST['acf']['location-email-address'];
+	  }
+	  $mail_sent = wp_mail($to,$subject,$message,$headers);
+  }
+  
+  if (get_post_type($post_id) == 'location' && get_post_status($post_id) == 'pending' && !is_user_logged_in()) {
+		$to = $_POST['acf']['location-email-address'];
+		$headers = 'From: '.get_option('blogname').' '.esc_html__('Nachrichtenservice','qfm')." <noreply@".qfm_maildomain().">" . "\r\n";
+		$headers .= 'Reply-To: '.get_option('admin_email'). "\r\n" .
+		$subject = '['.get_bloginfo('name').']'.' Dein Beitrag';
+		$message = 'Hallo '.$_POST['acf']['location-nickname'].','."\r\n\r\n";
+		$message .= 'vielen Dank für deinen Beitrag auf '.get_bloginfo('url').'. Du hast Folgendes geschrieben: '."\r\n\r\n";
+		$message .= '----'."\r\n\r\n".addslashes($post->post_title)."\r\n\r\n".addslashes($post->post_content)."\r\n\r\n".'----'."\r\n\r\n";
+		$message .= 'Falls Du diesen Beitrag nicht selbst geschrieben hast, melde Dich bitte bei uns unter '.get_option('admin_email').'.'."\r\n\r\n";
+		$message .= 'Wir werden deinen Beitrag schnellstmöglich prüfen und freischalten.'."\r\n\r\n";
+		$message .= 'Viele Grüße vom'."\r\n";
+		$message .= 'Team "Quartiere für Menschen"'."\r\n\r\n";
+		$message .= '---'."\r\n";
+		$message .= 'Du möchtest für den ADFC Hamburg spenden? Das geht hier: https://hamburg.adfc.de/spende.';
+		$mail_sent = wp_mail($to,$subject,$message,$headers);
+	}
+
+}
+add_action('save_post', 'qfm_location_notification_email', 1000, 3);

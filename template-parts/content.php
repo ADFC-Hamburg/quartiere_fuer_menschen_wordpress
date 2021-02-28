@@ -26,6 +26,24 @@
 				qfm_posted_by();
 				?>
 			</div><!-- .entry-meta -->
+		<?php endif;
+		
+		if ( 'location' === get_post_type() && get_post_meta($post->ID,'location-nickname',true)) :
+			?>
+			<div class="entry-meta">
+				<?php
+				$time_string = '<time class="entry-date published updated" datetime="%1$s">%2$s</time>';
+				$time_string = sprintf(
+					$time_string,
+					esc_attr( get_the_date( DATE_W3C ) ),
+					esc_html( get_the_date() ),
+					esc_attr( get_the_modified_date( DATE_W3C ) ),
+					esc_html( get_the_modified_date() )
+				);
+				
+				echo '<span class="posted-by-community">'.sprintf(esc_html('Dies ist ein Community-Beitrag, verfasst von %1$s und veröffentlicht am %2$s','qfm'),'<strong>'.get_post_meta($post->ID,'location-nickname',true).'</strong>','<strong>'.$time_string.'</strong>').'</span>';
+				?>
+			</div><!-- .entry-meta -->
 		<?php endif; ?>
 	</header><!-- .entry-header -->
 	
