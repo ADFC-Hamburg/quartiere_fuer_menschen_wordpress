@@ -26,6 +26,13 @@ if($locations_query->have_posts()) {
 		global $post;
 		
 		$locationObj = new stdClass();
+		
+		$community = '';
+		if(trim(get_post_meta($post->ID,'location-nickname',true))) {
+			$locationObj->isCommunity = true;
+			$community = '-community';
+		}
+		
 		$locationObj->id = get_the_ID();
 		$locationObj->title = get_the_title();
 		$locationObj->lat = get_post_meta($post->ID,'location-latitude',true);
@@ -35,14 +42,28 @@ if($locations_query->have_posts()) {
 		$terms = get_the_terms($post->ID,'location-type');
 		$locationObj->term = $terms[0]->slug;
 		$attachment = false;
-		if(qfm_get_attachment_by_post_name( 'marker-'.$terms[0]->slug )) $attachment = qfm_get_attachment_by_post_name( 'marker-'.$terms[0]->slug );
-		if(qfm_get_attachment_by_post_name( 'marker-'.$terms[0]->slug.'-2' ) && get_post_meta($post->ID,'location-use-alternative-icon',true)==1) $attachment = qfm_get_attachment_by_post_name( 'marker-'.$terms[0]->slug.'-2' );
-		$locationObj->markerUrl = wp_get_attachment_url($attachment->ID);
-		$locationObj->permalink = get_permalink();
-		$locationObj->isCommunity = false;
-		if(trim(get_post_meta($post->ID,'location-nickname',true))) {
-			$locationObj->isCommunity = true;
+		$attachment2 = false;
+		if(qfm_get_attachment_by_post_name( 'marker-'.$terms[0]->slug ) && !get_post_meta($post->ID,'location-use-alternative-icon',true)==1) {
+			$attachment = qfm_get_attachment_by_post_name( 'marker-'.$terms[0]->slug.$community );
+			if(!is_object($attachment)) {
+				$attachment = qfm_get_attachment_by_post_name( 'marker-'.$terms[0]->slug );
+			}
+			else {
+				$attachment2 = qfm_get_attachment_by_post_name( 'marker-'.$terms[0]->slug );
+			}
 		}
+		elseif(qfm_get_attachment_by_post_name( 'marker-'.$terms[0]->slug.'-2' ) && get_post_meta($post->ID,'location-use-alternative-icon',true)==1) {
+			$attachment = qfm_get_attachment_by_post_name( 'marker-'.$terms[0]->slug.$community.'-2' );
+			if(!is_object($attachment)) {
+				$attachment = qfm_get_attachment_by_post_name( 'marker-'.$terms[0]->slug.'-2' );
+			}
+			else {
+				$attachment2 = qfm_get_attachment_by_post_name( 'marker-'.$terms[0]->slug.'-2' );
+			}
+		}
+		if(is_object($attachment)) $locationObj->markerUrl = wp_get_attachment_url($attachment->ID);
+		if(is_object($attachment2)) $locationObj->markerUrl2 = wp_get_attachment_url($attachment2->ID);
+		$locationObj->permalink = get_permalink();
 		if(current_user_can('edit_posts')) $locationObj->editEntryLink = get_edit_post_link();
 		$locations[] = $locationObj;
 	}

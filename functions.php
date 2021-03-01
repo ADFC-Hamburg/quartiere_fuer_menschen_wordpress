@@ -25,7 +25,7 @@ if ( is_admin() ) {
 
 if ( ! defined( '_S_VERSION' ) ) {
 	// Replace the version number of the theme on each release.
-	define( '_S_VERSION', '0.5' );
+	define( '_S_VERSION', '0.6' );
 }
 
 if ( ! function_exists( 'qfm_setup' ) ) :
@@ -464,10 +464,17 @@ function qfm_shortcode_qfm_map($atts) {
 		</script>
 		<div class="qfm-map-buttons'.($single ? ' single' : '').'">';
 	if(!$setmarker && !$single) {
+		$adfc_icon = '';
+		$community_icon = '';
+		$attachment = qfm_get_attachment_by_post_name( 'marker-filter-adfc' );
+		if($attachment) $adfc_icon = '<span class="icon adfc-icon"><img src="'.wp_get_attachment_url($attachment->ID).'" alt="ADFC icon" /></span>';
+		$attachment = qfm_get_attachment_by_post_name( 'marker-filter-community' );
+		echo $adfc_icon;
+		if($attachment) $community_icon = '<span class="icon community-icon"><img src="'.wp_get_attachment_url($attachment->ID).'" alt="Community icon" /></span>';
 		$output .= '
 			<p class="filter-adfc-or-community">
-				<a class="button small filter show-adfc" href="#">'.esc_html__('ADFC-Orte aus-/einblenden','qfm').'</a>
-				<a class="button small filter show-community" href="#">'.esc_html__('Community-Orte aus-/einblenden','qfm').'</a>
+				<a class="button small filter show-adfc" href="#">'.$adfc_icon.esc_html__('ADFC-Orte aus-/einblenden','qfm').'</a>
+				<a class="button small filter show-community" href="#">'.$community_icon.esc_html__('Community-Orte aus-/einblenden','qfm').'</a>
 			</p>';
 	}
 	$output .= '

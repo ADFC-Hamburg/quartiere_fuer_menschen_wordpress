@@ -12,10 +12,32 @@
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<header class="entry-header">
 		<?php
+		$icon_output = '';
+		if(get_post_type() === 'location') {
+			$community = '';
+			if(trim(get_post_meta($post->ID,'location-nickname',true))) {
+				$community = '-community';
+			}
+			$terms = get_the_terms($post->ID,'location-type');
+			$attachment = false;
+			if(qfm_get_attachment_by_post_name( 'marker-'.$terms[0]->slug ) && !get_post_meta($post->ID,'location-use-alternative-icon',true)==1) {
+				$attachment = qfm_get_attachment_by_post_name( 'marker-'.$terms[0]->slug.$community );
+				if(!is_object($attachment)) $attachment = qfm_get_attachment_by_post_name( 'marker-'.$terms[0]->slug );
+			}
+			elseif(qfm_get_attachment_by_post_name( 'marker-'.$terms[0]->slug.'-2' ) && get_post_meta($post->ID,'location-use-alternative-icon',true)==1) {
+				$attachment = qfm_get_attachment_by_post_name( 'marker-'.$terms[0]->slug.$community.'-2' );
+				if(!is_object($attachment)) $attachment = qfm_get_attachment_by_post_name( 'marker-'.$terms[0]->slug.'-2' );
+			}
+		}
+		
+		if(is_object($attachment)) {
+			$icon_output = '<span class="marker-icon"><img src="'.wp_get_attachment_url($attachment->ID).'" alt="Icon" /></span>';
+		}
+		
 		if ( is_singular() ) :
-			the_title( '<h1 class="entry-title">', '</h1>' );
+			the_title( '<h1 class="entry-title">'.$icon_output, '</h1>' );
 		else :
-			the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
+			the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">'.$icon_output, '</a></h2>' );
 		endif;
 
 		if ( 'post' === get_post_type() ) :

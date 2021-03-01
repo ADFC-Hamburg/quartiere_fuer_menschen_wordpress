@@ -4,7 +4,7 @@ Theme URI: https://stadtkreation.de/en/wordpress-themes-and-plugins/
 Author: STADTKREATION
 Author URI: https://stadtkreation.de/en/about-us/
 Description: WordPress theme for Quartiere fuer Menschen project by ADFC Hamburg.
-Version: 0.5
+Version: 0.6
 Tested up to: 5.4
 Requires PHP: 5.6
 License: GNU General Public License v2 or later
@@ -148,6 +148,18 @@ input[type="search"] {
 
 .button.filter {
 	background:#0e4d82;
+}
+
+.button.filter .icon {
+	display:inline-block;
+	vertical-align:middle;
+	height:1.5em;
+	padding-right:.5em;
+}
+
+.button.filter .icon img {
+	height:100%;
+	width:auto;
 }
 
 .button.inactive {
@@ -317,6 +329,20 @@ nav.main-navigation li.current_page_item a {
 	max-width:1120px;
 	margin:auto;
 	padding:.4em 20px;
+}
+
+#primary .entry-title .marker-icon {
+	display:inline-block;
+	vertical-align:middle;
+	height:1em;
+	padding:4px;
+	background:white;
+	margin-right:.5em;
+}
+
+#primary .entry-title .marker-icon img {
+	height:100%;
+	width:auto;
 }
 
 #primary .entry-meta {

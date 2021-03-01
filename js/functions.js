@@ -97,32 +97,30 @@ function initMap() {
 		if(!mapAtts.setMarker) {
 			
 			// layer switcher
-			var layerSwitcherHTML = '<div class="qfm-map-layer-switcher-wrapper"><div class="qfm-map-layer-switcher-toggle">Filter/Legende</div><ul class="qfm-map-layer-switcher">';
-			for(var i in locationTypes) {
-				var el = $('<span>'+locationTypes[i][3]+'</span>');
-				var infoUrl = el.find('a').first().attr('href');
-				var infoOutput = '';
-				if(infoUrl) infoOutput = '<a target="_blank" href="'+infoUrl+'" class="info" title="Infos zu dieser Ortskategorie">Info</a>';
-				layerSwitcherHTML += '<li><a href="#" class="activated cat cat-'+locationTypes[i][0]+'" data-name="'+locationTypes[i][0]+'"><span class="icon"></span> '+locationTypes[i][1]+'</a> '+infoOutput+'</li>';
+			if(!mapAtts.currentID) {
+				var layerSwitcherHTML = '<div class="qfm-map-layer-switcher-wrapper"><div class="qfm-map-layer-switcher-toggle">Filter/Legende</div><ul class="qfm-map-layer-switcher">';
+				for(var i in locationTypes) {
+					var el = $('<span>'+locationTypes[i][3]+'</span>');
+					var infoUrl = el.find('a').first().attr('href');
+					var infoOutput = '';
+					if(infoUrl) infoOutput = '<a target="_blank" href="'+infoUrl+'" class="info" title="Infos zu dieser Ortskategorie">Info</a>';
+					layerSwitcherHTML += '<li><a href="#" class="activated cat cat-'+locationTypes[i][0]+'" data-name="'+locationTypes[i][0]+'"><span class="icon"></span> '+locationTypes[i][1]+'</a> '+infoOutput+'</li>';
+				}
+				layerSwitcherHTML += '</ul></div>';
+				$('.qfm-map').append(layerSwitcherHTML);
+				$('.qfm-map-layer-switcher-toggle').on('click',function(){
+					$(this).closest('.qfm-map-layer-switcher-wrapper').find('ul').slideToggle();
+					$(this).toggleClass('toggled');
+				});
+				$('.qfm-map .qfm-map-layer-switcher a.cat').on('click',function(e){
+					e.preventDefault();
+					$(this).blur();
+					$(this).toggleClass('activated');
+					markerLayer[$(this).attr('data-name')].eachLayer(function(layer) {
+						$(layer._icon).toggleClass('hidden-layer-marker');
+					});
+				});
 			}
-			layerSwitcherHTML += '</ul></div>';
-			$('.qfm-map').append(layerSwitcherHTML);
-			$('.qfm-map-layer-switcher-toggle').on('click',function(){
-				$(this).closest('.qfm-map-layer-switcher-wrapper').find('ul').slideToggle();
-				$(this).toggleClass('toggled');
-			});
-			$('.qfm-map .qfm-map-layer-switcher a.cat').on('click',function(e){
-				e.preventDefault();
-				$(this).blur();
-				if($(this).hasClass('activated')) {
-					$(this).removeClass('activated');
-					qfmMap.removeLayer(markerLayer[$(this).attr('data-name')]);
-				}
-				else {
-					$(this).addClass('activated');
-					qfmMap.addLayer(markerLayer[$(this).attr('data-name')]);
-				}
-			});
 				
 			var params = '';
 			if(mapAtts.currentID) {
@@ -138,8 +136,11 @@ function initMap() {
 					var markerIcon = L.icon({iconUrl: objData.markerUrl, iconSize: [currentIconWidth, currentIconHeight], iconAnchor: [(currentIconWidth/2), currentIconHeight], popupAnchor: [0, (currentIconHeight+3)*-1]});
 					
 					// add icon to layer switcher
-					if($('.qfm-map-layer-switcher').find('a.cat-'+objData.term+' .icon').html()=='') {
-						$('.qfm-map-layer-switcher').find('a.cat-'+objData.term+' .icon').append('<img src="'+objData.markerUrl+'" alt="Icon" />');
+					if(!mapAtts.currentID) {
+						if($('.qfm-map-layer-switcher').find('a.cat-'+objData.term+' .icon').html()=='') {
+							if(objData.markerUrl2 && objData.markerUrl2 != objData.markerUrl) $('.qfm-map-layer-switcher').find('a.cat-'+objData.term+' .icon').append('<img src="'+objData.markerUrl2+'" alt="Icon2" />');
+							else $('.qfm-map-layer-switcher').find('a.cat-'+objData.term+' .icon').append('<img src="'+objData.markerUrl+'" alt="Icon" />');
+						}
 					}
 					
 					// popup settings
