@@ -197,3 +197,7 @@
 .qfm-map .leaflet-marker-icon.hidden-layer-marker {
 	display:none !important;
 }
+
+path.leaflet-interactive {
+	cursor:default;
+}

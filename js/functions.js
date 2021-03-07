@@ -1,7 +1,7 @@
 // Main JS functions for Quartiere fuer Menschen WordPress theme
 
 var $ = jQuery, qfmMap, marker = [];
-var iconWidth = 26, iconHeight = 32, locationMarker = '', currentLat, currentLon;
+var iconWidth = 26, iconHeight = 32, locationMarker = '', currentLat, currentLon, hasCLickedInside;
 
 $(document).ready(function(){
 	
@@ -25,6 +25,18 @@ function initMap() {
 			for(var i in locationTypes) markerLayer[locationTypes[i][0]] = new L.LayerGroup();
 		}
 		
+		var styleProjektGebiet = {
+			'color': '#ee7f00',
+			'weight': 2,
+			'dashArray': '5,5',
+			'opacity': 1,
+			'fillOpacity': 0,
+			'fillColor': '#ffffff'
+		};
+		
+			
+		var projektGebietLayer = L.geoJson.ajax(geojsonData.projektGebietLayer,{style:styleProjektGebiet});
+		
 		// set map bounds
 		bounds = new Array();
 		if(mapAtts.bounds) {
@@ -43,6 +55,7 @@ function initMap() {
 		// create the list of layers to be shown in the map as array
 		var layerList = [];
 		layerList.push(mapnikLayer);
+		layerList.push(projektGebietLayer);
 		for(var i in markerLayer) layerList.push(markerLayer[i]);
 		
 		// create the map
@@ -159,7 +172,7 @@ function initMap() {
 					
 					// bind popup to marker
 					if(!mapAtts.currentID) {
-						marker[marker.length-1].bindPopup(popupContent);
+						if(marker[marker.length-1]) marker[marker.length-1].bindPopup(popupContent);
 					}
 					else {
 						currentLat = objData.lat;
@@ -191,9 +204,10 @@ function initMap() {
 			// Add marker at respective location on click on map within allowed area and save lat/lon values to html form fields.
 			qfmMap.on('singleclick',function(e){
 				setTimeout(function(){
-					 setMarker(e.latlng.lat,e.latlng.lng);
-					/*if(!hasClickedOutside) setMarker(e.latlng.lat,e.latlng.lng);
-					else hasClickedOutside = false;*/
+					if(hasClickedInside) setMarker(e.latlng.lat,e.latlng.lng);
+					else {
+						hasClickedInside = false;
+					}
 				},200);
 			});
 			
@@ -217,10 +231,9 @@ function initMap() {
 				//else alert(mapTextData.zoomToSetPosition);
 			}
 			
-			/*deutschlandNegativVereinfachtLayer.on('singleclick', function(e) {
-				alert(mapTextData.clickedOutside);
-				hasClickedOutside = true;
-			});*/
+			projektGebietLayer.on('singleclick', function(e) {
+				hasClickedInside = true;
+			});
 		}
 	}
 }

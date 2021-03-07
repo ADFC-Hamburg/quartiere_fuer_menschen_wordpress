@@ -25,7 +25,7 @@ if ( is_admin() ) {
 
 if ( ! defined( '_S_VERSION' ) ) {
 	// Replace the version number of the theme on each release.
-	define( '_S_VERSION', '0.6' );
+	define( '_S_VERSION', '0.6.1' );
 }
 
 if ( ! function_exists( 'qfm_setup' ) ) :
@@ -387,8 +387,8 @@ function qfm_shortcode_qfm_map($atts) {
 	
 	$a = shortcode_atts( array(
 		'zoom' => 15,
-		'lat' => 53.57785,
-		'lon' => 9.95228,
+		'lat' => 53.57744,
+		'lon' => 9.94786,
 		'maxzoom' => '',
 		'minzoom' => '',
 		'showentry-zoom' => '', 
@@ -451,11 +451,12 @@ function qfm_shortcode_qfm_map($atts) {
 				'.(sizeof($bounds_ne)==2 && sizeof($bounds_sw)==2 ? '"bounds" : ['.$bounds_sw[0].','.$bounds_sw[1].','.$bounds_ne[0].','.$bounds_ne[1].'],' : '').'
 			}
 			var geojsonData = {
-			// "bundeslaender" : "'.get_template_directory_uri().'/geojson/bundeslaender_reduziert.geojson",
+				"projektGebietLayer" : "'.get_template_directory_uri().'/geojson/projektgebiet.geojson",
 			};
 			var mapTextData = {
 				"viewDetails" : "'.esc_html__('View details','qfm').'",
 				"editLocation" : "'.esc_html__('Edit location','qfm').'",
+				"clickedOutside" : "'.esc_html__('Bitte wähle einen Punkt innerhalb des Projektgebeits.','qfm').'",
 			}
 			var showId = "";';
 	if(isset($_GET['showentry']) && intval($_GET['showentry']) && get_post(intval($_GET['showentry']))) $output .= '
