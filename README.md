@@ -1,70 +1,46 @@
-[![Build Status](https://travis-ci.org/Automattic/_s.svg?branch=master)](https://travis-ci.org/Automattic/_s)
+Quartiere für Menschen WordPress Theme
+======================================
 
-_s
-===
+Quartiere für Menschen ist ein WordPress Theme für lokale (ortsbezogene) ADFC-Aktionen. Es wurde im ersten Quartal 2021 entwickelt und erstmals für das Projekt "Quartiere für Menschen" in Hamburg-Eimsbüttel eingesetzt. Evtl. sind noch minimale Anpassungen notwendig, um das Ganze für andere Initiativen nutzbar zu machen. Im Großen und Ganzen ist es aber so wie vorliegend (Version 0.7, 07.09.2021) bereits auf andere Projekte/Orte übertragbar.
 
-Hi. I'm a starter theme called `_s`, or `underscores`, if you like. I'm a theme meant for hacking so don't use me as a Parent Theme. Instead try turning me into the next, most awesome, WordPress theme out there. That's what I'm here for.
+Hier eine Kurzanleitung:
 
-My ultra-minimal CSS might make me look like theme tartare but that means less stuff to get in your way when you're designing your awesome theme. Here are some of the other more interesting things you'll find here:
+* Vorab: Das Theme benötigt die Plugins "Advanced Custom Fields" und "Classic Widgets"! Außerdem sollte ein Plugin installiert werden, das das Hinzufügen von Widget-CSS-Klassen erlaubt.
 
-* A modern workflow with a pre-made command-line interface to turn your project into a more pleasant experience.
-* A just right amount of lean, well-commented, modern, HTML5 templates.
-* A custom header implementation in `inc/custom-header.php`. Just add the code snippet found in the comments of `inc/custom-header.php` to your `header.php` template.
-* Custom template tags in `inc/template-tags.php` that keep your templates clean and neat and prevent code duplication.
-* Some small tweaks in `inc/template-functions.php` that can improve your theming experience.
-* A script at `js/navigation.js` that makes your menu a toggled dropdown on small screens (like your phone), ready for CSS artistry. It's enqueued in `functions.php`.
-* 2 sample layouts in `sass/layouts/` made using CSS Grid for a sidebar on either side of your content. Just uncomment the layout of your choice in `sass/style.scss`.
-Note: `.no-sidebar` styles are automatically loaded.
-* Smartly organized starter CSS in `style.css` that will help you to quickly get your design off the ground.
-* Full support for `WooCommerce plugin` integration with hooks in `inc/woocommerce.php`, styling override woocommerce.css with product gallery features (zoom, swipe, lightbox) enabled.
-* Licensed under GPLv2 or later. :) Use it to make something cool.
+* Oberer Balken über dem Menü: Design > Widgets. Hier kann zum Beispiel "Ein Projekt von ADFC [Irgendeinort]" mit Link stehen.
 
-Installation
----------------
+* Logo und Site Icon: Customizer > Website-Informationen, dort die entsprechenden Felder
 
-### Requirements
+* Gewünschte Unterseiten erstellen, auch eine Seite für das Eintragungsformular für neue Orte sowie die Seite mit der Hauptkarte (kann auch die Startseite sein)
 
-`_s` requires the following dependencies:
+* Hauptkarte per Shortcode einbinden: [qfm-map]. Folgende Attribute können verwendet werden Attributsnamen und die Standards, wenn Attribut nicht angegeben:
+	"zoom' => 15,
+	'lat' => 53.57744,
+	'lon' => 9.94786,
+	'maxzoom' => '',
+	'minzoom' => '',
+	'showentry-zoom' => '', 
+	'bounds-ne' => '',
+	'bounds-sw' => '',
+	'minzoom-setmarker' => 13,
+	'singlezoom' => 18,
+	
+* Für das Eintragsungsformular für neue Orte bitte "Page with ACF form" als Seiten-Template laden
 
-- [Node.js](https://nodejs.org/)
-- [Composer](https://getcomposer.org/)
+* Unten auf der Startseite bei den entsprechenden Feldern auswählen, welches die Seite mit dem Eintragsformular und welches die Seite mit der Karte ist (kann auch die Startseite sein)
 
-### Quick Start
+* Wichtig: Einstellungen > Lesen - hier eine Startseite auswählen, nur so funktioniert das Theme
 
-Clone or download this repository, change its name to something else (like, say, `megatherium-is-awesome`), and then you'll need to do a six-step find and replace on the name in all the templates.
+* Hauptmenü: Design > Menüs, Menü erstellen, "Primär" als Position wählen
 
-1. Search for `'_s'` (inside single quotations) to capture the text domain and replace with: `'megatherium-is-awesome'`.
-2. Search for `_s_` to capture all the functions names and replace with: `megatherium_is_awesome_`.
-3. Search for `Text Domain: _s` in `style.css` and replace with: `Text Domain: megatherium-is-awesome`.
-4. Search for <code>&nbsp;_s</code> (with a space before it) to capture DocBlocks and replace with: <code>&nbsp;Megatherium_is_Awesome</code>.
-5. Search for `_s-` to capture prefixed handles and replace with: `megatherium-is-awesome-`.
-6. Search for `_S_` (in uppercase) to capture constants and replace with: `MEGATHERIUM_IS_AWESOME_`.
+* Headerbild (panoramaförmig): Als Beitragsbild der jeweiligen Seite setzen
 
-Then, update the stylesheet header in `style.css`, the links in `footer.php` with your own information and rename `_s.pot` from `languages` folder to use the theme's slug. Next, update or delete this readme.
+* Ortstypen-Kategorien erstellen (Orte > Ortstypen), Titelform bitte nummerieren: 01-kategoriename1, 02-kategoriename2 ... (für ADFC-Einträge) und immer zusätzlich eine Community-Kategorie für Beiträge, die von Nutzerinnen und Nutzern kommen 01-kategoriename1-community, 02-kategoriename2-community ... Das Feld "Beschreibung" kann z.B. für kategoriebezogene Links (z.B. Anker-Links auf einer Glossar-Seite) genutzt werden.
 
-### Setup
+* PNG-Bilder als Kartenicons zu den Kategorien hochladen, 52px breit und 64px hoch: marker-01-kategoriename1.png, marker-02-kategoriename2.png, marker-01-kategoriename1-community.png, marker-02-kategoriename2-community.png ... Auf eine Übereinstimmung mit den Nummern/Kategorienamen der Ortstypen achten, nur dann wird es korrekt angezeigt.
 
-To start using all the tools that come with `_s`  you need to install the necessary Node.js and Composer dependencies :
+* Umriss des Projektgebiets als GeoJSON-Datei: Hier ist (leider) noch ein direkter Eingriff ins Theme notwendig. Die Datei projektgebiet.geojson im Ordner geojson muss per FTP durch eine gleichnamige Datei mit dem Umriss des Projektgebiets als Polygon ersetzt werden.
 
-```sh
-$ composer install
-$ npm install
-```
+* Für die Footer-Widgets können folgende Klassen verwendet werden: adfc, kontakt sowie columns als ergänzende Klasse.
 
-### Available CLI commands
-
-`_s` comes packed with CLI commands tailored for WordPress theme development :
-
-- `composer lint:wpcs` : checks all PHP files against [PHP Coding Standards](https://developer.wordpress.org/coding-standards/wordpress-coding-standards/php/).
-- `composer lint:php` : checks all PHP files for syntax errors.
-- `composer make-pot` : generates a .pot file in the `languages/` directory.
-- `npm run compile:css` : compiles SASS files to css.
-- `npm run compile:rtl` : generates an RTL stylesheet.
-- `npm run watch` : watches all SASS files and recompiles them to css when they change.
-- `npm run lint:scss` : checks all SASS files against [CSS Coding Standards](https://developer.wordpress.org/coding-standards/wordpress-coding-standards/css/).
-- `npm run lint:js` : checks all JavaScript files against [JavaScript Coding Standards](https://developer.wordpress.org/coding-standards/wordpress-coding-standards/javascript/).
-- `npm run bundle` : generates a .zip archive for distribution, excluding development and system files.
-
-Now you're ready to go! The next step is easy to say, but harder to do: make an awesome WordPress theme. :)
-
-Good luck!
+* [tbc]
