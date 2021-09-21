@@ -35,7 +35,7 @@ function initMap() {
 		};
 		
 			
-		var projektGebietLayer = L.geoJson.ajax(geojsonData.projektGebietLayer,{style:styleProjektGebiet});
+		var projektGebietLayer = L.geoJson(geojsonData.projektGebietLayer,{style:styleProjektGebiet});
 		
 		// set map bounds
 		bounds = new Array();
@@ -202,14 +202,24 @@ function initMap() {
 		else {
 			
 			// Add marker at respective location on click on map within allowed area and save lat/lon values to html form fields.
-			qfmMap.on('singleclick',function(e){
-				setTimeout(function(){
-					if(hasClickedInside) setMarker(e.latlng.lat,e.latlng.lng);
-					else {
-						hasClickedInside = false;
-					}
-				},200);
-			});
+			if(mapAtts.noOutsideClicks) {
+				projektGebietLayer.on('singleclick',function(e){
+					L.DomEvent.stopPropagation(e);
+					setMarker(e.latlng.lat,e.latlng.lng);
+				});
+				
+				qfmMap.on('singleclick', function(e){
+					alert(mapTextData.clickedOutside);
+				});
+			}
+			
+			else {
+				qfmMap.on('singleclick',function(e){
+					L.DomEvent.stopPropagation(e);
+					setMarker(e.latlng.lat,e.latlng.lng);
+				});
+			}
+				
 			
 			if($('#acf-location-longitude').val() && $('#acf-location-latitude').val()) {
 				setMarker($('#acf-location-latitude').val(),$('#acf-location-longitude').val())

@@ -25,7 +25,7 @@ if ( is_admin() ) {
 
 if ( ! defined( '_S_VERSION' ) ) {
 	// Replace the version number of the theme on each release.
-	define( '_S_VERSION', '0.7' );
+	define( '_S_VERSION', '0.8' );
 }
 
 if ( ! function_exists( 'qfm_setup' ) ) :
@@ -449,10 +449,14 @@ function qfm_shortcode_qfm_map($atts) {
 				'.($a['showentry-zoom'] ? '"showentryZoom" : '.$a['showentry-zoom'].',' : '').($setmarker ? '
 				"minZoomSetmarker" : '.$minzoomSetmarker.',' : '').'
 				'.(sizeof($bounds_ne)==2 && sizeof($bounds_sw)==2 ? '"bounds" : ['.$bounds_sw[0].','.$bounds_sw[1].','.$bounds_ne[0].','.$bounds_ne[1].'],' : '').'
+				"noOutsideClicks" : '.intval(get_post_meta(get_option('page_on_front'),'no-outside-clicks',true)).'
 			}
+			'.(trim(get_post_meta(get_option('page_on_front'),'project-area-geojson',true))!='' ? '
 			var geojsonData = {
-				"projektGebietLayer" : "'.get_template_directory_uri().'/geojson/projektgebiet.geojson",
-			};
+				"projektGebietLayer" : '.preg_replace("/\r|\n/","",get_post_meta(get_option('page_on_front'),'project-area-geojson',true)).',
+			};' : '
+			var geojsonData = {"projektGebietLayer" : '.preg_replace("/\r|\n/","",file_get_contents(get_template_directory_uri().'/geojson/projektgebiet.geojson')).',
+			};').'
 			var mapTextData = {
 				"viewDetails" : "'.esc_html__('View details','qfm').'",
 				"editLocation" : "'.esc_html__('Edit location','qfm').'",
@@ -538,6 +542,20 @@ if(function_exists('acf_add_local_field_group')) {
 				'type' => 'post_object',
 				'post_type' => 'page',
 				
+			),
+			array (
+				'key' => 'project-area-geojson',
+				'label' => esc_html__('GeoJSON-Daten des Projektgebiets','qfm'),
+				'instructions' => esc_html__('Kopiere die GeoJSON-Daten der Projektgebiets-Abgrenzung in dieses Feld.','qfm'),
+				'name' => 'project-area-geojson',
+				'type' => 'textarea',
+			),
+			array (
+				'key' => 'no-outside-clicks',
+				'label' => esc_html__('Setzen von Orten außerhalb des Projektgebiets unterbinden','qfm'),
+				'name' => 'no-outside-clicks',
+				'type' => 'true_false',
+				'default_value' => 1,
 			),
 		),
 		'location' => array (
