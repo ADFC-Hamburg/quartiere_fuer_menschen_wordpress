@@ -39,8 +39,8 @@ Hier eine Kurzanleitung:
 
 * PNG-Bilder als Kartenicons zu den Kategorien hochladen, 52px breit und 64px hoch: marker-01-kategoriename1.png, marker-02-kategoriename2.png, marker-01-kategoriename1-community.png, marker-02-kategoriename2-community.png ... Auf eine Übereinstimmung mit den Nummern/Kategorienamen der Ortstypen achten, nur dann wird es korrekt angezeigt.
 
-* Umriss des Projektgebiets als GeoJSON-Datei: Hier ist (leider) noch ein direkter Eingriff ins Theme notwendig. Die Datei projektgebiet.geojson im Ordner geojson muss per FTP durch eine gleichnamige Datei mit dem Umriss des Projektgebiets als Polygon ersetzt werden.
+* Umriss des Projektgebiets als GeoJSON-Datei: Die GeoJSON-Daten des Projektgebies-Umrisses werden in der Bearbeitungs-Ansicht der Startseite direkt in das Feld für die GeoJSON-Daten unten kopiert.
+
+* Dort kann auch eingestellt werden, ob Nutzerinnen und Nutzer Punkte außerhalb des Projektgebiets setzen dürfen oder nicht.
 
 * Für die Footer-Widgets können folgende Klassen verwendet werden: adfc, kontakt sowie columns als ergänzende Klasse.
-
-* [tbc]
